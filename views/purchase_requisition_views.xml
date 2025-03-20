@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <record id="view_purchase_requisition_form" model="ir.ui.view">
+        <field name="name">purchase.requisition.form.inherit.pn_settings</field>
+        <field name="model">purchase.requisition</field>
+        <field name="inherit_id" ref="purchase_requisition.view_purchase_requisition_form"/>
+        <field name="priority" eval="331"/>
+        <field name="arch" type="xml">
+
+            <!-- Insertar el campo show_service_dates en el formulario si no existe -->
+            <xpath expr="//field[@name='date_end']" position="before">
+                <field name="show_service_dates" invisible="1"/>
+            </xpath>
+
+            <xpath expr="//field[@name='date_end']" position="attributes">
+                <attribute name="invisible">1</attribute>
+                <attribute name="required">0</attribute>
+            </xpath>
+
+            <xpath expr="//field[@name='schedule_date']" position="attributes">
+                <attribute name="invisible">not show_service_dates</attribute>
+                <attribute name="required">show_service_dates</attribute>
+            </xpath>
+            
+            <xpath expr="//field[@name='schedule_date']" position="after">
+                <field name="service_delivery_date" invisible="show_service_dates" required="not show_service_dates"/>
+                <field name="service_completion_date" invisible="show_service_dates" required="not show_service_dates"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>
