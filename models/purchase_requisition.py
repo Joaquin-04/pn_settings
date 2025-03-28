@@ -6,7 +6,7 @@ _logger = logging.getLogger(__name__)
 class PurchaseRequisition(models.Model):
     _inherit = 'purchase.requisition'
 
-    service_delivery_date = fields.Date(string="Fecha de Entrega de Servicio")
+    service_delivery_date = fields.Date(string="Fecha de Inicio de Servicio")
     service_completion_date = fields.Date(string="Fecha de Finalización de Servicio")
     show_service_dates = fields.Boolean(compute="_compute_show_service_dates", store=True)
 
